@@ -3,6 +3,7 @@ const auth = require("../auth");
 const models = require("../models");
 const User = models.User;
 
+// Create user method
 module.exports.createUser = (reqBody) => {
 
 	return User.findOne({
@@ -26,6 +27,7 @@ module.exports.createUser = (reqBody) => {
 	
 }
 
+// Authenticate user method
 module.exports.authenticate = (reqBody) => {
 
 	return User.findOne({

@@ -2,6 +2,7 @@ require('dotenv').config();
 const cors = require("cors");
 const express = require("express");
 const { Sequelize } = require('sequelize');
+const bookRoutes = require("./routes/book");
 const userRoutes = require("./routes/user");
 
 // Defines the connection to the localhost SQL database
@@ -15,6 +16,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
+app.use("/api/books", bookRoutes);
 app.use("/api/users", userRoutes);
 
 app.listen(process.env.PORT || 4000, () => {
