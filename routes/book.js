@@ -17,4 +17,24 @@ router.get("/:bookId", (req, res) => {
 	bookController.getBook(req.params.bookId).then(result => res.send(result));
 })
 
+// Route for updating a book
+router.put("/:bookId", (req, res) => {
+
+	const data = {
+		bookId: req.params.bookId,
+		title: req.body.title,
+		description: req.body.description,
+		coverImage: req.body.coverImage,
+		price: req.body.price,
+		userId: req.body.userId
+	}
+
+	bookController.updateBook(data).then(result => res.send(result));
+})
+
+// Route for deleting a book
+router.delete("/:bookId", (req, res) => {
+	bookController.deleteBook(req.params.bookId).then(result => res.send(result));
+})
+
 module.exports = router;

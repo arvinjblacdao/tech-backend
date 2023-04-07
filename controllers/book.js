@@ -39,3 +39,43 @@ module.exports.getBook = (reqParam) => {
 		return book;
 	}
 }
+
+// Update a book method
+module.exports.updateBook = (data) => {
+	return Book.findByPk(data.bookId)
+	.then(result => {
+		if (result === null) {
+			return false;
+		} else {
+			return Book.update(
+				{ 
+					title : data.title,
+					description: data.description,
+					coverImage: data.coverImage,
+					price: data.price,
+					userId: data.userId
+				},
+				{
+					where: { id: data.bookId }
+				}
+			)
+		}
+	});
+	
+}
+
+// Delete a book method
+module.exports.deleteBook = (bookId) => {
+	return Book.findByPk(bookId)
+	.then(result => {
+		if (result === null) {
+			return false;
+		} else {
+			Book.destroy({
+				where: { id : bookId }
+			});
+
+			return true;
+		}
+	})
+}
