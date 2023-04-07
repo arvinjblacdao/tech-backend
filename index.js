@@ -2,6 +2,8 @@ require('dotenv').config();
 const cors = require("cors");
 const express = require("express");
 const { Sequelize } = require('sequelize');
+
+// Defines the connection to the localhost SQL database
 const sequelize = new Sequelize(process.env.DB_DBNAME, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
   host: process.env.DB_HOST,
   dialect : "mysql"
