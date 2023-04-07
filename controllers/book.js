@@ -32,12 +32,15 @@ module.exports.getAllBooks = () => {
 
 // Get a single book method
 module.exports.getBook = (reqParam) => {
-	const book = Book.findByPk(reqParam);
-	if (book === null) {
-		return false;
-	} else {
-		return book;
-	}
+	return Book.findByPk(reqParam)
+	.then(result => {
+		if (result === null) {
+			return false;
+		} else {
+			return book;
+		}
+	});
+	
 }
 
 // Update a book method
