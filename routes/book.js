@@ -17,6 +17,11 @@ router.get("/:bookId", (req, res) => {
 	bookController.getBook(req.params.bookId).then(result => res.send(result));
 })
 
+// Route for getting a single book with parameters
+router.post("/detail", (req, res) => {
+	bookController.getBookByParameters(req.body).then(result => res.send(result));
+})
+
 // Route for updating a book
 router.put("/:bookId", (req, res) => {
 

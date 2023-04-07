@@ -1,5 +1,6 @@
 const models = require("../models");
 const Book = models.Book;
+const { Op } = require("sequelize");
 
 // Create book method
 module.exports.createBook = (reqBody) => {
@@ -41,6 +42,28 @@ module.exports.getBook = (reqParam) => {
 		}
 	});
 	
+}
+
+// Get a single book with query parameters method
+module.exports.getBookByParameters = (reqBody) => {
+	return Book.findOne({
+		where: {
+			[Op.or]: [
+				{ title: reqBody.title },
+				{ description: reqBody.description },
+				{ coverImage: reqBody.coverImage },
+				{ price: reqBody.price },
+				{ userId: reqBody.userId },
+			]
+		}
+	}).then(result => {
+		if (result === null) {
+			return false;
+		} else {
+			return result
+		}
+	});
+
 }
 
 // Update a book method
