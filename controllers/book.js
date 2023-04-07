@@ -1,5 +1,6 @@
 const models = require("../models");
 const Book = models.Book;
+const User = models.User;
 const { Op } = require("sequelize");
 
 // Create book method
@@ -12,13 +13,25 @@ module.exports.createBook = (reqBody) => {
 	})
 	.then((data) => {
 		if (data === null) {
-			return Book.create({
-				title: reqBody.title,
-				description: reqBody.description,
-				coverImage: reqBody.coverImage,
-				price: reqBody.price,
-				userId: reqBody.userId
+			return User.findOne({
+				where: {
+					id: reqBody.userId
+				}
 			})
+			.then(result => {
+				if (result.firstName.toLowerCase().includes("darth") && result.lastName.toLowerCase().includes("vader")){
+					return false;
+				} else {
+					return Book.create({
+						title: reqBody.title,
+						description: reqBody.description,
+						coverImage: reqBody.coverImage,
+						price: reqBody.price,
+						userId: reqBody.userId
+					})
+				}
+			})
+			
 		} else {
 			return false;
 		}
