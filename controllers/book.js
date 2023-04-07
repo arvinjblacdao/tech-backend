@@ -24,3 +24,18 @@ module.exports.createBook = (reqBody) => {
 	})
 	
 }
+
+// Get all books method
+module.exports.getAllBooks = () => {
+	return Book.findAll({});
+}
+
+// Get a single book method
+module.exports.getBook = (reqParam) => {
+	const book = Book.findByPk(reqParam);
+	if (book === null) {
+		return false;
+	} else {
+		return book;
+	}
+}
