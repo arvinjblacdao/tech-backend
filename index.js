@@ -2,6 +2,7 @@ require('dotenv').config();
 const cors = require("cors");
 const express = require("express");
 const { Sequelize } = require('sequelize');
+const userRoutes = require("./routes/user");
 
 // Defines the connection to the localhost SQL database
 const sequelize = new Sequelize(process.env.DB_DBNAME, process.env.DB_USERNAME, process.env.DB_PASSWORD, {
@@ -14,6 +15,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
+app.use("/api/users", userRoutes);
 
 app.listen(process.env.PORT || 4000, () => {
 	console.log(`API is now online on port ${ process.env.PORT || 4000 }`)
