@@ -38,7 +38,7 @@ module.exports.getBook = (reqParam) => {
 		if (result === null) {
 			return false;
 		} else {
-			return book;
+			return result;
 		}
 	});
 	
